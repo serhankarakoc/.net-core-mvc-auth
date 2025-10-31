@@ -1,6 +1,5 @@
-﻿using BilginetAkademi.Data;
-// 👈 Yeni Using: Kendi modellerinizin bulunduğu namespace
-using BilginetAkademi.Models;
+using DavetLink.Data;
+using DavetLink.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore; // 👈 Yeni Using: Identity Store'ları için gerekli olabilir
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +14,7 @@ builder.Services.AddHttpContextAccessor();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
   options.UseNpgsql(connectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // 👇 BURASI GÜNCELLENDİ: User yerine User ve Rol servisi eklendi.
