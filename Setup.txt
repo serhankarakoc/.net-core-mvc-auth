@@ -18,3 +18,7 @@ Update-Database
 
 Tüm Identity sayfalarını scaffold etmek için:
 Çözüm->Yeni İskeleli Öğe
+
+Kullanıcılar için aşağıdakileri dosyalardan değiştir.
+ApplicationUser -> User
+ApplicationRole -> Role
