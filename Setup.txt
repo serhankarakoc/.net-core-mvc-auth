@@ -1,12 +1,3 @@
-Paketler
-
-Microsoft.AspNetCore.Identity.EntityFrameworkCore
-Microsoft.EntityFrameworkCore
-Microsoft.EntityFrameworkCore.Tools
-Microsoft.VisualStudio.Web.CodeGeneration.Design
-Microsoft.EntityFrameworkCore.Design
-Microsoft.AspNetCore.Identity.UI
-
 Postgresql için
 Npgsql.EntityFrameworkCore.PostgreSQL
 
@@ -26,4 +17,4 @@ Database e gönder
 Update-Database
 
 Tüm Identity sayfalarını scaffold etmek için:
-dotnet aspnet-codegenerator identity -dc WebApplication1.Data.ApplicationDbContext --force
+Çözüm->Yeni İskeleli Öğe
