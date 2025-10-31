@@ -1,0 +1,34 @@
+@model VerifyEmailViewModel
+
+@{
+    ViewData["Title"] = "E-posta Doğrulama";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="auth-title">E-posta Doğrulama</h2>
+
+@if (Model?.EmailSent == true)
+{
+    <div class="alert alert-success text-center">
+        <i class="fas fa-check-circle fa-2x mb-3"></i>
+        <h5>Doğrulama E-postası Gönderildi!</h5>
+        <p class="mb-0">@Model.Email adresine bir doğrulama linki gönderdik. Lütfen e-postanızı kontrol edin.</p>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <i class="fas fa-envelope fa-3x text-warning mb-3"></i>
+        <h5>E-posta Doğrulanmadı</h5>
+        <p class="mb-4">Hesabınızı kullanmaya devam etmek için e-posta adresinizi doğrulamanız gerekiyor.</p>
+        
+        <form asp-action="SendVerificationEmail" method="post">
+            <input type="hidden" asp-for="Email" />
+            <button type="submit" class="btn btn-auth w-100">Doğrulama E-postasını Tekrar Gönder</button>
+        </form>
+    </div>
+}
+
+<div class="auth-links">
+    <a asp-action="Login" class="text-decoration-none">Giriş Sayfasına Dön</a>
+</div>

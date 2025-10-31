@@ -1,0 +1,30 @@
+@model ConfirmPasswordViewModel
+
+@{
+    ViewData["Title"] = "Şifre Onaylama";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="auth-title">Şifre Onaylama</h2>
+
+<p class="text-center mb-4">Bu işlemi gerçekleştirmek için lütfen şifrenizi girin.</p>
+
+<form asp-action="ConfirmPassword" method="post">
+    <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+    
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label">Şifre</label>
+        <input asp-for="Password" type="password" class="form-control" placeholder="Mevcut şifrenizi girin" />
+        <span asp-validation-for="Password" class="field-validation-error"></span>
+    </div>
+
+    <button type="submit" class="btn btn-auth w-100">Onayla</button>
+</form>
+
+<div class="auth-links">
+    <a asp-action="Index" asp-controller="Home" class="text-decoration-none">İptal Et</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

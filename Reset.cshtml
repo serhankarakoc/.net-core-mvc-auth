@@ -1,0 +1,36 @@
+
+@{
+    ViewData["Title"] = "Şifre Sıfırlama";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="auth-title">Yeni Şifre Belirleyin</h2>
+
+<form asp-action="ResetPassword" method="post">
+    <input type="hidden" asp-for="Email" />
+    <input type="hidden" asp-for="Token" />
+    
+    <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+    
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label">Yeni Şifre</label>
+        <input asp-for="Password" type="password" class="form-control" placeholder="Yeni şifrenizi girin" />
+        <span asp-validation-for="Password" class="field-validation-error"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ConfirmPassword" class="form-label">Yeni Şifre Tekrar</label>
+        <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Yeni şifrenizi tekrar girin" />
+        <span asp-validation-for="ConfirmPassword" class="field-validation-error"></span>
+    </div>
+
+    <button type="submit" class="btn btn-auth w-100">Şifreyi Sıfırla</button>
+</form>
+
+<div class="auth-links">
+    <a asp-action="Login" class="text-decoration-none">Giriş Sayfasına Dön</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

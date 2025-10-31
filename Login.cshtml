@@ -1,0 +1,41 @@
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Giriş Yap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="auth-title">Hesabınıza Giriş Yapın</h2>
+
+<form asp-action="Login" method="post">
+    <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+    
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">E-posta</label>
+        <input asp-for="Email" class="form-control" placeholder="E-posta adresinizi girin" />
+        <span asp-validation-for="Email" class="field-validation-error"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label">Şifre</label>
+        <input asp-for="Password" type="password" class="form-control" placeholder="Şifrenizi girin" />
+        <span asp-validation-for="Password" class="field-validation-error"></span>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input asp-for="RememberMe" class="form-check-input" />
+        <label asp-for="RememberMe" class="form-check-label">Beni Hatırla</label>
+    </div>
+
+    <button type="submit" class="btn btn-auth w-100">Giriş Yap</button>
+
+    <div class="auth-links">
+        <a asp-action="ForgotPassword" class="text-decoration-none">Şifremi Unuttum?</a>
+        <span class="mx-2">|</span>
+        <a asp-action="Register" class="text-decoration-none">Hesap Oluştur</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

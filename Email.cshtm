@@ -1,0 +1,30 @@
+@model ForgotPasswordViewModel
+
+@{
+    ViewData["Title"] = "Şifre Sıfırlama";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="auth-title">Şifremi Unuttum</h2>
+
+<p class="text-center mb-4">Şifre sıfırlama linkini almak için e-posta adresinizi girin.</p>
+
+<form asp-action="ForgotPassword" method="post">
+    <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+    
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">E-posta</label>
+        <input asp-for="Email" class="form-control" placeholder="E-posta adresinizi girin" />
+        <span asp-validation-for="Email" class="field-validation-error"></span>
+    </div>
+
+    <button type="submit" class="btn btn-auth w-100">Şifre Sıfırlama Linki Gönder</button>
+</form>
+
+<div class="auth-links">
+    <a asp-action="Login" class="text-decoration-none">Giriş Sayfasına Dön</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
