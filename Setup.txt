@@ -1,5 +1,21 @@
 Paketler
+
 Microsoft.AspNetCore.Identity.EntityFrameworkCore
 Microsoft.EntityFrameworkCore
 Microsoft.EntityFrameworkCore.Tools
+
+Postgresql için
 Npgsql.EntityFrameworkCore.PostgreSQL
+
+Program.cs de aşağıdaki kodu değiştir.
+// Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(connectionString));
+
+Migrations klasörünü sil
+Migrasyonları tekrar oluştur
+Add-Migration InitBaseModelSupport
+
+Database e gönder
+Update-Database
