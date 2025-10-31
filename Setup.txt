@@ -1,0 +1,5 @@
+Paketler
+Microsoft.AspNetCore.Identity.EntityFrameworkCore
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Tools
+Npgsql.EntityFrameworkCore.PostgreSQL
