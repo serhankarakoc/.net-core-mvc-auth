@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using BilginetAkademi.Models; // User, Role ve IBaseEntity modellerinizin bulunduğu yer
+using DavetLink.Models;
 using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BilginetAkademi.Data
+namespace DavetLink.Data
 {
     // IdentityDbContext<TUser, TRole, TKey> yapısını User, Role ve int PK ile kullanır
     public class ApplicationDbContext : IdentityDbContext<User, Role, int>
