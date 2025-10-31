@@ -22,3 +22,7 @@ Tüm Identity sayfalarını scaffold etmek için:
 Kullanıcılar için aşağıdakileri dosyalardan değiştir.
 ApplicationUser -> User
 ApplicationRole -> Role
+
+_LoginPartial.cshtml dosyasında
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
