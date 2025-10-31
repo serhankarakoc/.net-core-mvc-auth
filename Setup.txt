@@ -19,3 +19,6 @@ Add-Migration InitBaseModelSupport
 
 Database e gönder
 Update-Database
+
+Tüm Identity sayfalarını scaffold etmek için:
+dotnet aspnet-codegenerator identity -dc WebApplication1.Data.ApplicationDbContext --force
