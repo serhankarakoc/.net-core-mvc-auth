@@ -1,5 +1,5 @@
-using DavetLink.Data;
-using DavetLink.Models;
+using CoreApplication.Data;
+using CoreApplication.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -54,4 +54,5 @@ app.MapRazorPages()
  .WithStaticAssets();
 
 app.Run();
+
 
