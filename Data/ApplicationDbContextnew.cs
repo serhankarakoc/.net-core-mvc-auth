@@ -25,11 +25,9 @@ namespace DavetLink.Data
         {
             base.OnModelCreating(builder);
 
-            // Ortak yapılandırmalar
             ConfigureBaseEntityProperties<User>(builder);
             ConfigureBaseEntityProperties<Role>(builder);
 
-            // Özelleştirilmiş audit ilişkileri
             ConfigureUser(builder);
             ConfigureRole(builder);
         }
@@ -106,7 +104,6 @@ namespace DavetLink.Data
             });
         }
 
-        // SaveChanges override
         public override int SaveChanges()
         {
             ApplyAuditInfo();
@@ -142,11 +139,9 @@ namespace DavetLink.Data
                         entity.UpdatedAt = now;
                         entity.UpdatedBy = auditId;
 
-                        // Eğer DeletedAt yeni atanmışsa (soft delete)
                         if (entity.DeletedAt != null && entry.OriginalValues[nameof(IBaseEntity.DeletedAt)] == null)
                             entity.DeletedBy = auditId;
 
-                        // Created alanlarını koru
                         entry.Property(nameof(IBaseEntity.CreatedAt)).IsModified = false;
                         entry.Property(nameof(IBaseEntity.CreatedBy)).IsModified = false;
                         break;
