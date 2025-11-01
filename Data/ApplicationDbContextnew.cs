@@ -119,11 +119,15 @@ namespace DavetLink.Data
         private void ApplyAuditInfo()
         {
             var currentUserId = GetCurrentUserId();
-            int? auditId = currentUserId > 0 ? currentUserId : (int?)null;
-            var now = DateTime.Now;
+            int? auditId = currentUserId > 0 ? currentUserId : null;
+            var now = DateTime.UtcNow; // DateTime.Now yerine UtcNow
 
             foreach (var entry in ChangeTracker.Entries<IBaseEntity>())
             {
+                if (entry.State == EntityState.Detached || 
+                    entry.State == EntityState.Unchanged)
+                    continue;
+
                 var entity = entry.Entity;
 
                 switch (entry.State)
@@ -133,17 +137,31 @@ namespace DavetLink.Data
                         entity.UpdatedAt = now;
                         entity.CreatedBy = auditId;
                         entity.UpdatedBy = auditId;
+                        entity.IsActive = true;
                         break;
 
                     case EntityState.Modified:
                         entity.UpdatedAt = now;
                         entity.UpdatedBy = auditId;
 
+                        // Soft delete kontrolü
                         if (entity.DeletedAt != null && entry.OriginalValues[nameof(IBaseEntity.DeletedAt)] == null)
+                        {
                             entity.DeletedBy = auditId;
+                            entity.DeletedAt = now;
+                            entity.IsActive = false;
+                        }
 
                         entry.Property(nameof(IBaseEntity.CreatedAt)).IsModified = false;
                         entry.Property(nameof(IBaseEntity.CreatedBy)).IsModified = false;
+                        break;
+
+                    case EntityState.Deleted:
+                        // Soft delete implementasyonu
+                        entry.State = EntityState.Modified;
+                        entity.DeletedAt = now;
+                        entity.DeletedBy = auditId;
+                        entity.IsActive = false;
                         break;
                 }
             }
@@ -151,13 +169,21 @@ namespace DavetLink.Data
 
         private int GetCurrentUserId()
         {
-            if (_httpContextAccessor.HttpContext?.User?.Identity?.IsAuthenticated == true)
+            try
             {
-                var userIdClaim = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                if (int.TryParse(userIdClaim, out var userId))
-                    return userId;
+                var httpContext = _httpContextAccessor?.HttpContext;
+                if (httpContext?.User?.Identity?.IsAuthenticated == true)
+                {
+                    var userIdClaim = httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    if (int.TryParse(userIdClaim, out var userId))
+                        return userId;
+                }
+                return 0;
             }
-            return 0;
+            catch
+            {
+                return 0;
+            }
         }
     }
 }
