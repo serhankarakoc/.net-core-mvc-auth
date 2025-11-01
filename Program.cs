@@ -1,13 +1,11 @@
 using DavetLink.Data;
 using DavetLink.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore; // 👈 Yeni Using: Identity Store'ları için gerekli olabilir
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 👇 BURASI EKLENDİ: HttpContextAccessor'ı DI konteynırına ekleyin
-// ApplicationDbContext'teki SaveChanges metodu ile aktif kullanıcı ID'sini almak için zorunludur.
 builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.
@@ -17,21 +15,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-// 👇 BURASI GÜNCELLENDİ: User yerine User ve Rol servisi eklendi.
-// AddDefaultIdentity yerine AddIdentity kullanıldı.
 builder.Services.AddIdentity<User, Role>(options =>
 {
-    // Identity seçeneklerinizi burada ayarlayın
     options.SignIn.RequireConfirmedAccount = true;
-    // options.Password, options.Lockout, vb. ayarları buraya eklenebilir.
 })
-// ApplicationDbContext'i Identity Store olarak kullan
     .AddEntityFrameworkStores<ApplicationDbContext>()
-    // UserStore ve RoleStore'u int PK tipiyle açıkça belirtmek daha güvenlidir.
     .AddUserStore<UserStore<User, Role, ApplicationDbContext, int>>()
     .AddRoleStore<RoleStore<Role, ApplicationDbContext, int>>()
-    .AddDefaultTokenProviders() // Token desteği (şifre sıfırlama vb.)
-    .AddDefaultUI(); // Varsayılan Identity Razor Pages için gerekli
+    .AddDefaultTokenProviders()
+    .AddDefaultUI();
 
 builder.Services.AddControllersWithViews();
 
@@ -48,8 +40,6 @@ else
 }
 app.UseRouting();
 
-// ⚠️ DİKKAT: Authentication, Authorization'dan ÖNCE GELMELİDİR!
-// Identity kullanırken kimlik doğrulama her zaman yetkilendirmeden önce çalışmalıdır.
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -64,3 +54,4 @@ app.MapRazorPages()
  .WithStaticAssets();
 
 app.Run();
+
