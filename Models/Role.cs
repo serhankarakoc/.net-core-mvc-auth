@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace BilginetAkademi.Models
+namespace CoreApplication.Models
 {
     public class Role : IdentityRole<int>, IBaseEntity
     {
@@ -21,4 +21,5 @@ namespace BilginetAkademi.Models
         public Role() : base() { }
         public Role(string roleName) : base(roleName) { }
     }
+
 }
