@@ -1,22 +1,17 @@
 using CoreApplication.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace DavetLink.Data
+namespace CoreApplication.Data
 {
-    // IdentityDbContext<TUser, TRole, TKey> yapısını User, Role ve int PK ile kullanır
     public class ApplicationDbContext : IdentityDbContext<User, Role, int>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public ApplicationDbContext(
             DbContextOptions<ApplicationDbContext> options,
-            IHttpContextAccessor httpContextAccessor) // IHttpContextAccessor enjekte ediliyor
+            IHttpContextAccessor httpContextAccessor)
             : base(options)
         {
             _httpContextAccessor = httpContextAccessor;
