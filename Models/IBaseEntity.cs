@@ -1,4 +1,4 @@
-﻿namespace BilginetAkademi.Models
+﻿namespace CoreApplication.Models
 {
     public interface IBaseEntity
     {
@@ -11,4 +11,5 @@
         int? DeletedBy { get; set; }
         bool IsActive { get; set; }
     }
+
 }
