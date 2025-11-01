@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BilginetAkademi.Models
+namespace CoreApplication.Models
 {
     public abstract class BaseEntity : IBaseEntity
     {
