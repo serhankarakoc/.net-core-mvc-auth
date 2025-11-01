@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace BilginetAkademi.Models
+namespace CoreApplication.Models
 {
     public class User : IdentityUser<int>, IBaseEntity
     {
@@ -31,4 +31,5 @@ namespace BilginetAkademi.Models
         public User() : base() { }
         public User(string userName) : base(userName) { }
     }
+
 }
