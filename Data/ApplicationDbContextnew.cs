@@ -120,7 +120,7 @@ namespace DavetLink.Data
         {
             var currentUserId = GetCurrentUserId();
             int? auditId = currentUserId > 0 ? currentUserId : null;
-            var now = DateTime.UtcNow; // DateTime.Now yerine UtcNow
+            var now = DateTime.UtcNow;
 
             foreach (var entry in ChangeTracker.Entries<IBaseEntity>())
             {
