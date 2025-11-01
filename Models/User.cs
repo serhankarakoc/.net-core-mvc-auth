@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace CoreApplication.Models
 {
     public class User : IdentityUser<int>, IBaseEntity
     {
-        // BaseEntity property'leri
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
@@ -14,7 +13,6 @@ namespace CoreApplication.Models
         public int? DeletedBy { get; set; }
         public bool IsActive { get; set; } = true;
 
-        // Custom property'ler
         [StringLength(100)]
         public string FirstName { get; set; } = string.Empty;
 
@@ -23,7 +21,6 @@ namespace CoreApplication.Models
 
         public DateTime? DateOfBirth { get; set; }
 
-        // Navigation property
         public virtual User? CreatedByUser { get; set; }
         public virtual User? UpdatedByUser { get; set; }
         public virtual User? DeletedByUser { get; set; }
