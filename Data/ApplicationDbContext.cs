@@ -1,4 +1,4 @@
-using DavetLink.Models;
+using CoreApplication.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
