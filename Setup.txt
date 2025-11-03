@@ -1,5 +1,7 @@
 Postgresql için
 Npgsql.EntityFrameworkCore.PostgreSQL
+Sayfalama için
+X.PagedList.Mvc.Core
 
 Program.cs de aşağıdaki kodu değiştir.
 // Add services to the container.
